@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" type="text/css" href="form.css">
+    <meta charset="utf-8"/>
+    <title>Prova webinho</title>
+
+</head>
+
+<body>
+<form class="formulario" method="post" class="formulario">
+        <p>Envie um nome preenchendo o formulário abaixo</p>
+
+        <div class="field">
+            <label for="name">Seu Nome:</label>
+            <input class="input" type="text" name="name" placeholder="Digite um nome*" required>
+        </div>
+
+        <div class="radiobox">
+            <span>Como deseja receber os dados?</span>
+            <input id="lista" type="radio" name="gender"  value="LI" checked><label>Lista</label>
+            <input id="pilha" type="radio" name="gender"  value="PI"><label>Pilha</label>
+        </div>
+        
+            <button type="button"  onclick="printRadioValue()">Inserir</button>
+            <button type="button"  onclick="limpalista()">Limpar Dados</button>
+            <input type="reset" value="Limpar Texto">
+<br></br>
+<br></br>
+</form>
+
+        <div class="print">
+            <div id="lista">
+                <h1>LISTA</h1>
+                <ul id="listafilho"></ul>
+            </div>
+            <div id="pilha">
+                <h1>PILHA</h1>
+                    <ol id="pilhafilho"></ol>
+            </div>
+        </div>
+
+    </body> 
+    <script>
+        const listaElement = document.querySelector('ul')
+        const pilhaElement = document.querySelector('ol')
+        const inptElement = document.querySelector('.input')
+
+        const listaList = [];
+        const pilhaList = [];
+
+        function printLista() {
+            listaElement.innerHTML = '';
+
+            for (const lista of listaList) {
+                const elementoLista = document.createElement('li')
+                const textoLista = document.createTextNode(lista)
+
+                elementoLista.appendChild(textoLista);
+                listaElement.appendChild(elementoLista)
+            }
+
+        }
+
+        function printPilha() {
+            pilhaElement.innerHTML = '';
+
+            for (const pilha of pilhaList) {
+                const elementoPilha = document.createElement('li')
+                const textoPilha = document.createTextNode(pilha)
+
+                elementoPilha.appendChild(textoPilha);
+                pilhaElement.appendChild(elementoPilha)
+            }
+
+        }
+
+        function adicionaLista() {
+            const textoLista = inptElement.value
+            listaList.push(textoLista)
+            inptElement.value = ''
+            printLista()
+        }
+
+        function adicionaPilha() {
+            const textoPilha = inptElement.value
+            pilhaList.unshift(textoPilha)
+            inptElement.value = ''
+            printPilha()
+        }
+
+        function printRadioValue() {
+            
+            var ele = document.getElementsByName('gender');
+            for (i = 0; i < ele.length; i++) {
+                if (ele[i].checked) {
+                    
+                    if (ele[i].value === 'LI')
+                    adicionaLista()
+                    printLista()
+                    bloqueiaLista()
+                    if (ele[i].value === 'PI')
+                    adicionaPilha()
+                    printPilha()
+                    bloqueiaLista()
+                }
+            }
+        }
+
+        function bloqueiaLista(){
+            
+            if(listaList.length != 0 || pilhaList.length != 0){
+                document.querySelector('#lista').disabled = true;
+                document.querySelector('#pilha').disabled = true;
+            }
+        }
+            function limpalista(){
+            
+                var el = document.getElementById( 'listafilho' );
+                while(listaList.length) {
+                listaList.pop();
+                            }
+                while (el.firstChild) {
+                    el.firstChild.remove();
+                }
+
+                var al = document.getElementById( 'pilhafilho' );
+                
+                while(pilhaList.length) {
+                pilhaList.pop();
+                }
+                while (al.firstChild) {
+                    al.firstChild.remove();
+                }
+                
+                document.querySelector('#lista').disabled = false;
+                document.querySelector('#pilha').disabled = false;
+            }
+
+    </script>
+
+
+</html>

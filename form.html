@@ -13,7 +13,7 @@
 
         <div class="field">
             <label for="name">Seu Nome:</label>
-            <input class="input" type="text" name="name" placeholder="Digite um nome*" required>
+            <input class="input" type="text" name="name" placeholder="Digite um nome*" required >
         </div>
 
         <div class="radiobox">
@@ -25,21 +25,23 @@
             <button type="button"  onclick="printRadioValue()">Inserir</button>
             <button type="button"  onclick="limpalista()">Limpar Dados</button>
             <input type="reset" value="Limpar Texto">
+        
 <br></br>
-<br></br>
-</form>
 
-        <div class="print">
+
+        
             <div id="lista">
                 <h1>LISTA</h1>
                 <ul id="listafilho"></ul>
             </div>
+            <br></br>
+<br></br>
             <div id="pilha">
                 <h1>PILHA</h1>
                     <ol id="pilhafilho"></ol>
             </div>
-        </div>
-
+        </form>
+    
     </body> 
     <script>
         const listaElement = document.querySelector('ul')
@@ -54,7 +56,7 @@
 
             for (const lista of listaList) {
                 const elementoLista = document.createElement('li')
-                const textoLista = document.createTextNode(lista)
+                const textoLista = document.createTextNode(lista )
 
                 elementoLista.appendChild(textoLista);
                 listaElement.appendChild(elementoLista)
@@ -68,6 +70,7 @@
             for (const pilha of pilhaList) {
                 const elementoPilha = document.createElement('li')
                 const textoPilha = document.createTextNode(pilha)
+                
 
                 elementoPilha.appendChild(textoPilha);
                 pilhaElement.appendChild(elementoPilha)
